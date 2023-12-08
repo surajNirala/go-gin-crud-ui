@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <title>Go-Lang</title>
+</head>
+<body>
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="row">
+        {{ if .error }}
+        <div class="alert alert-danger" role="alert">
+          {{ .error }}
+        </div>>
+        {{ end }}
+
+        {{ if .success }}
+        <div class="alert alert-success" role="alert">
+          {{ .success }}
+        </div>
+        {{ end }}
+        
+        {{ if .Message }}
+        <div class="alert alert-success" role="alert">
+            {{ .Message }}
+        {{ end }}
+      </div> 
+      <div class="row shadow">
+       <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Company</th>
+              <th scope="col">Email</th>
+              <th scope="col">URL</th>
+              <th scope="col">Shift</th>
+              <th scope="col">Newsletter</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ if .Users }}
+              {{ range $index, $user := .Users }}
+                <tr>
+                  <th scope="row">{{ .id }}</th>
+                  <td>{{ .first_name }}</td>
+                  <td>{{ .last_name }}</td>
+                  <td>{{ .phone }}</td>
+                  <td>{{ .company }}</td>
+                  <td>{{ .email }}</td>
+                  <td>{{ .url }}</td>
+                  <td>{{ .shift }}</td>
+                  <td>{{ .newsletter }}</td>
+                  <td>
+                    <a href="/edit/{{ .id }}" class="btn btn-success">Edit</a>
+                    <a href="/view/{{ .id }}" class="btn btn-primary">View</a>
+                    <a onclick="return confirm('Are you sure you want to delete this item?');" href="/delete/{{ .id }}" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+              {{ end }}
+            {{ end }}
+          </tbody>
+        </table>
+       </div>
+       <div class="col-md-12">
+        <form action="/" method="POST">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="first">First Name</label>
+                <input type="text" class="form-control" placeholder="" name="first_name" id="first_name">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+      
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="last">Last Name</label>
+                <input type="text" class="form-control" placeholder=""name="last_name" id="last_name">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+          </div>      
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" class="form-control" placeholder="company" name="company" id="company">
+              </div>
+      
+      
+            </div>
+            <!--  col-md-6   -->
+      
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="phone">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+          </div>
+          <!--  row   -->
+          <div class="row">
+            <div class="col-md-6">
+      
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="email">
+              </div>
+            </div>
+            <!--  col-md-6   -->
+      
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url">Your Website <small>Please include http://</small></label>
+                <input type="text" class="form-control" name="url" id="url" placeholder="url">
+              </div>
+      
+            </div>
+            <!--  col-md-6   -->
+          </div>
+          <!--  row   -->
+          <label for="shift">When is the best time of day to reach you?</label>
+          <div class="radio">
+            <label>
+              <input type="radio" name="shift" id="shift" value="am" checked>Morning
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="shift" id="shift" value="pm" checked>Evening
+            </label>
+          </div>
+          <label for="newsletter">Would you like to recieve our email newsletter?</label>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="newsletter" value="Sure!" id="newsletter"> Sure!
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+       </div>
+      </div>  
+    </div>
+</body>
+</html>
